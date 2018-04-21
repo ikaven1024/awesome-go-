@@ -2,8 +2,14 @@
 
 Easy to write and build a GO application
 
+## Features:
+
+- Easy to build, test without GOPATH
+- Generate version from GIT
+
 ## Requires
 
+- Git
 - Golang
 - Make
 
@@ -16,6 +22,9 @@ You can clone this template wherever you like (not limited in GOPATH).
 ```
 git clone https://github.com/ikaven1024/go-project-template.git <your-workspace>
 ```
+
+### set your GO package
+Open `hack/lib/init.sh`, and set `PROJ_PACKAGE` to your GO package`
 
 ### add your application
 
@@ -35,6 +44,8 @@ make        # build all of your application
 make verify # run verify
 make test   # run test
 ```
+
+More see in Makefile.
 
 ---
 

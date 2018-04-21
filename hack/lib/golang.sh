@@ -12,17 +12,6 @@ function golang::setup_env() {
     cd ${dir}
 }
 
-function golang::build() {
-    golang::setup_env
-
-    local -a packages_to_build=`go list ./cmd/...`
-    log::status "Building:" ${packages_to_build[@]}
-
-    CGO_ENABLED=0 go install -installsuffix cgo ${packages_to_build[@]}
-
-    log::status "Done. Put into ${GOBIN}"
-}
-
 function golang::find_go_files() {
   find . -not \( \
       \( \
@@ -31,3 +20,4 @@ function golang::find_go_files() {
       \) -prune \
     \) -name '*.go'
 }
+

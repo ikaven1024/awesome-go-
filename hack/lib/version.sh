@@ -19,15 +19,18 @@ function version::ldflags() {
 _get_version_vars() {
     GIT_COMMIT=$(git rev-parse "HEAD^{commit}")
 
-    GIT_VERSION=$(git describe --tags ${GIT_COMMIT}) ret=0 || ret=$?
-    if [[ $ret -eq 1 ]]; then
-        log::fatal 'Cannot get version without git tag. Run `git tag <tagname>` to create a git tag'
+    GIT_VERSION=$(git describe --tags ${GIT_COMMIT} 2>/dev/null) ret=0 || ret=$?
+    if [[ $ret -ne 0 ]]; then
+        local commit_number=$(git log --pretty=oneline | wc -l)
+        local commit_id=$(git rev-parse --short HEAD)
+        GIT_VERSION=${commit_number}-${commit_id}
     fi
 
-    if local git_status=$("${git[@]}" status --porcelain 2>/dev/null) && [[ -z ${git_status} ]]; then
+    if local git_status=$("git" status --porcelain 2>/dev/null) && [[ -z ${git_status} ]]; then
         GIT_TREE_STATE="clean"
     else
         GIT_TREE_STATE="dirty"
+        GIT_VERSION+="-dirty"
     fi
 }
 

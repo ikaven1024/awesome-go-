@@ -15,7 +15,6 @@ function log::fatal() {
     }
     echo "Exiting with status ${code}" >&2
     exit ${code}
-
 }
 
 function log::status() {
