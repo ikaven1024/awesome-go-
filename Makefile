@@ -45,7 +45,7 @@ update:
 #   make check WHAT=pkg/kubelet GOFLAGS=-v
 .PHONY: check test
 check test:
-	hack/make-rules/test.sh $(WHAT) $(TESTS)
+	hack/test.sh $(WHAT) $(TESTS)
 
 # Build and run integration tests.
 #
@@ -57,7 +57,7 @@ check test:
 #   make test-integration
 .PHONY: test-integration
 test-integration: generated_files
-	hack/make-rules/test-integration.sh $(WHAT)
+	hack/test-integration.sh $(WHAT)
 
 # Remove all build artifacts.
 #
